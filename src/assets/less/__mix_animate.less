@@ -1,0 +1,355 @@
+/*マウスオーバーアニメーション*/
+/*
+a{
+	.mix_hvr-grow > .basic;
+}
+a:hover{
+	.mix_hvr-grow > .hover(1.3);
+}
+*/
+
+/*ちょっと拡大*/
+/*--------------*/
+.mix_hvr-grow{
+	.basic(@transition:0.2s){
+		display: inline-block;
+	  vertical-align: middle;
+	  -webkit-transform: perspective(1px) translateZ(0);
+	  transform: perspective(1px) translateZ(0);
+	  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+		.transition(@transition, ease-out);
+	}
+	.hover(@scale:1.05){
+	  -webkit-transform: scale(@scale);
+	  transform: scale(@scale);
+	}
+}
+
+/*カラーフェード*/
+/*--------------*/
+.mix_hvr-colorfade{
+	.basic{
+		display: inline-block;
+	  vertical-align: middle;
+	  -webkit-transform: perspective(1px) translateZ(0);
+	  transform: perspective(1px) translateZ(0);
+	  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+	  overflow: hidden;
+	  -webkit-transition-duration: 0.3s;
+	  transition-duration: 0.3s;
+	  -webkit-transition-property: all;
+	  transition-property: all;
+	}
+	.hover(@color:#000){
+		background-color: @color;
+	  color: white;
+	}
+}
+
+
+/* Overline From Center */
+/*--------------*/
+.mix_hvr-overline-center {
+	.basic(@border-color:#000,@border-size:4px,@transition:0.4s){
+		display: inline-block;
+	  vertical-align: middle;
+	  -webkit-transform: perspective(1px) translateZ(0);
+	  transform: perspective(1px) translateZ(0);
+	  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+	  position: relative;
+	  overflow: hidden;
+		&::before{
+			content: "";
+		  position: absolute;
+		  z-index: -1;
+		  left: 51%;
+		  right: 51%;
+		  top: 0;
+		  background: @border-color;
+		  height: @border-size;
+		  .transition(@transition, ease-out);
+		}
+	}
+	.hover{
+		&::before{
+			left: 0;
+		  right: 0;
+		}
+	}
+}
+
+
+/* Sweep To Right */
+/*--------------*/
+.mix_hvr-sweep-to-right{
+	.basic(@backgroudColor: #000,@transition:0.3s){
+		display: inline-block;
+	  vertical-align: middle;
+	  -webkit-transform: perspective(1px) translateZ(0);
+	  transform: perspective(1px) translateZ(0);
+	  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+	  position: relative;
+	  .transition(@transition, ease-out);
+		&::before{
+			content: "";
+		  position: absolute;
+		  z-index: -1;
+		  top: 0;
+		  left: 0;
+		  right: 0;
+		  bottom: 0;
+		  background: @backgroudColor;
+		  -webkit-transform: scaleX(0);
+		  transform: scaleX(0);
+		  -webkit-transform-origin: 0 50%;
+		  transform-origin: 0 50%;
+			.transition(@transition, ease-out);
+		}
+	}//basic
+	.hover(@hoverTxtColor:white){
+		color: @hoverTxtColor;
+		&::before{
+			-webkit-transform: scaleX(1);
+		  transform: scaleX(1);
+		}
+	}
+}
+
+
+/* Sweep To Left */
+/*--------------*/
+.mix_hvr-sweep-to-left{
+	.basic(@backgroudColor: #000,@transition:0.3s){
+		display: inline-block;
+	  vertical-align: middle;
+	  -webkit-transform: perspective(1px) translateZ(0);
+	  transform: perspective(1px) translateZ(0);
+	  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+	  position: relative;
+	  .transition(@transition, ease-out);
+		&::before{
+			content: "";
+		  position: absolute;
+		  z-index: -1;
+		  top: 0;
+		  left: 0;
+		  right: 0;
+		  bottom: 0;
+		  background: @backgroudColor;
+		  -webkit-transform: scaleX(0);
+		  transform: scaleX(0);
+		  -webkit-transform-origin: 100% 50%;
+		  transform-origin: 100% 50%;
+			.transition(@transition, ease-out);
+		}
+	}//basic
+	.hover(@hoverTxtColor:white){
+		color: @hoverTxtColor;
+		&::before{
+			-webkit-transform: scaleX(1);
+		  transform: scaleX(1);
+		}
+	}
+}
+
+
+/* ----------------------------------------------
+マウスオーバーでサムネル画像にアニメーション追加
+参考：http://gop.co.jp
+<a href=""><img src=""></a>
+*/
+
+/*Zoom*/
+.moa1(@zoom:1.2,@sec:0.3s){
+	a{
+		position: relative;
+		overflow: hidden;
+		img{
+			-webkit-transform: scale(1);
+			transform: scale(1);
+			-webkit-transition: all @sec ease-in-out;
+			transition: all @sec ease-in-out;
+		}/*img*/
+	}/*a.moa1*/
+	a:hover{
+		img{
+			-webkit-transform: scale(@zoom);
+			transform: scale(@zoom);
+		}
+	}
+}
+
+
+/*Zoom & Rotation*/
+.moa2(@zoom:1.2,@rotate:15deg,@sec:0.3s){
+	a{
+		position: relative;
+		overflow: hidden;
+		img{
+			-webkit-transform: rotate(0) scale(1);
+			transform: rotate(0) scale(1);
+			-webkit-transition: all @sec ease-in-out;
+			transition: all @sec ease-in-out;
+		}/*img*/
+	}/*a.moa2*/
+	a:hover{
+		img{
+			-webkit-transform: rotate(@rotate) scale(@zoom);
+			transform: rotate(@rotate) scale(@zoom);
+		}
+	}
+}
+/*----------------------------------------------*/
+
+
+
+
+/*---------------------------*/
+//マウスオーバーでアニメーション
+/*
+<a href="#" class="mvhov">
+	<img src="#" class="mvhov-tg mv_right">
+</a>
+*/
+/*---------------------------*/
+.mvhov-tg{
+	.transition(0.4s);
+}
+
+/*フェード*/
+.mvhov-tg.mv_fade{
+	opacity: 1;
+}
+.mvhov-tg.mv_fade.move{
+	opacity: 0;
+}
+
+/*左移動*/
+.mvhov-tg.mv_left{
+	.translate(0px,0px);
+}
+.mvhov-tg.mv_left.move{
+	.translate(-10px,0);
+}
+
+/*右移動*/
+.mvhov-tg.mv_right{
+	.translate(0px,0px);
+}
+.mvhov-tg.mv_right.move{
+	.translate(10px,0);
+}
+
+
+
+
+/*---------------------------*/
+//スクロールに合わせてアニメーション
+//<section class="mv mv_fade mv_top">・・・・</section>
+/*---------------------------*/
+/*基本スタイル*/
+.mv{
+	.transition(1s);
+}
+.mv.move:nth-child(2){
+	.transition-delay(0.2s);
+}
+.mv.move:nth-child(3){
+	.transition-delay(0.4s);
+}
+.mv.move:nth-child(4){
+	.transition-delay(0.6s);
+}
+.mv.move:nth-child(5){
+	.transition-delay(0.8s);
+}
+.mv.move:nth-child(6){
+	.transition-delay(1s);
+}
+.mv.move:nth-child(7){
+	.transition-delay(1.2s);
+}
+.mv.move:nth-child(8){
+	.transition-delay(1.4s);
+}
+.mv.move:nth-child(9){
+	.transition-delay(1.6s);
+}
+.mv.move:nth-child(10){
+	.transition-delay(1.8s);
+}
+
+
+/*ディレイ*/
+.mv.mv_delay,
+.mv.mv_delay02{
+	.transition-delay(0.2s);
+}
+.mv.mv_delay04{
+	.transition-delay(0.4s);
+}
+.mv.mv_delay06{
+	.transition-delay(0.6s);
+}
+.mv.mv_delay08{
+	.transition-delay(0.8s);
+}
+.mv.mv_delay10{
+	.transition-delay(1s);
+}
+
+/*フェード*/
+.mv.mv_fade{
+	opacity: 0;
+}
+.mv.mv_fade.move{
+	opacity: 1.0;
+}
+
+/*上移動*/
+.mv.mv_top{
+	.translate(0,30px);
+}
+.mv.mv_top.move{
+	.translate(0,0);
+}
+
+/*下移動*/
+.mv.mv_bottom{
+	.translate(0,-30px);
+}
+.mv.mv_bottom.move{
+	.translate(0,0);
+}
+
+/*左移動*/
+.mv.mv_left{
+	.translate(30px,0px);
+}
+.mv.mv_left.move{
+	.translate(0,0);
+}
+
+/*右移動*/
+.mv.mv_right{
+	.translate(-30px,0px);
+}
+.mv.mv_right.move{
+	.translate(0,0);
+}
+
+/*ちょっと縮小*/
+.mv.mv_min{
+	.scale(1.1,1.1);
+}
+.mv.mv_min.move{
+	.scale(1,1);
+}
+
+/*ちょっと拡大*/
+.mv.mv_mag{
+	.scale(0.9,0.9);
+}
+.mv.mv_mag.move{
+	.scale(1,1);
+}

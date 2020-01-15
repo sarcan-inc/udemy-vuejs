@@ -30,17 +30,25 @@ export default {
 </script>
 
 
-<style scoped>
-  header h1{
-    padding: 10px;
-    background-color:#ddd;
-    font-size: 20px;
-  }
-  header .blogmeta dl dt,
-  header .blogmeta dl dd{
-    display:inline-block;
-  }
-  header .blogmeta dl dd::before{
-    content:"｜"
-  }
+<style lang="less">
+  header{
+    h1{
+      padding: 10px;
+      background-color:blue;
+      font-size: 20px;
+      color: #fff;
+    }
+    .blogmeta{
+      dl{
+        dt,dd{
+          display:inline-block;
+        }
+        dd{
+          &::before{
+            content:"|"
+          }
+        }
+      }
+    }
+  }//header
 </style>

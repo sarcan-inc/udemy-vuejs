@@ -1,0 +1,355 @@
+/*スタイルリセット*/
+.reset(@style:block){
+	display: @style;
+	.transition(0);
+	position: static;
+	float: none;
+	overflow-y:scroll;
+	width: auto;
+	min-width: auto;
+	height: auto;
+	min-height: auto;
+	margin: 0;
+	padding: 0;
+	background: none;
+	border:0;
+	.opacity(1);
+	.round(0);
+	color: @txtColor;
+	line-height: 1.5;
+	text-indent: 0;
+	text-align: left;
+	vertical-align:baseline;
+	font-size: 100%;
+	font-weight: normal;
+	text-decoration: none;
+}
+
+
+/*透過*/
+.opacity(@opacity:0.8) {
+  opacity: @opacity;
+  // IE8 filter
+  @opacity-ie: (@opacity * 100);
+  filter: ~"alpha(opacity=@{opacity-ie})";
+}
+
+/*ぼかし*/
+.blur(@blur:5px){
+	-webkit-filter: blur(@blur);
+	filter: blur(@blur);
+}
+
+
+/*clearfix*/
+.clearfix(){
+	overflow:hidden;
+	zoom:1;
+}
+
+/*インラインブロック*/
+.inline_block{
+	display:inline-block;
+	*display: inline;
+	*zoom: 1;
+}
+
+/*文字数超過の時に....をつける*/
+.ellipsis(@w:100%){
+	white-space: nowrap;
+	width: @w;
+	overflow: hidden;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+}
+
+/*アスペクト比を保って拡大縮小*/
+.aspectHold(@ratio:100%,@parentWidth:100%){
+	position: relative;
+	width: @parentWidth;
+	&::before{
+		content:"";
+		display: block;
+		padding-top: @ratio;
+	}
+}
+
+/*
+ボックスサイジング
+padding と border の幅を要素の幅と高さに含める
+*/
+.box-sizing{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+
+/*シャドウ*/
+.box-shadow(@kyori:2px 2px, @blur:3px, @hirosa:0px, @color:rgba(0,0,0,0.5))	{
+	-webkit-box-shadow: @kyori @blur @hirosa @color;
+	   -moz-box-shadow: @kyori @blur @hirosa @color;
+	        box-shadow: @kyori @blur @hirosa @color;
+}
+
+
+
+/*角丸処理*/
+.round (@radius: 5px) {
+	border-radius: @radius;
+	-webkit-border-radius: @radius;
+	-moz-border-radius: @radius;
+}
+.round-top (@radius: 5px) {
+	border-radius: @radius @radius 0 0;
+	-webkit-border-radius: @radius @radius 0 0;
+	-moz-border-radius: @radius @radius 0 0;
+}
+.round-bottom (@radius: 5px) {
+	border-radius: 0 0 @radius @radius;
+	-webkit-border-radius: 0 0 @radius @radius;
+	-moz-border-radius: 0 0 @radius @radius;
+}
+.round-left (@radius: 5px) {
+	border-radius: @radius 0 0 @radius;
+	-webkit-border-radius: @radius 0 0 @radius;
+	-moz-border-radius: @radius 0 0 @radius;
+}
+.round-right (@radius: 5px) {
+	border-radius: 0 @radius @radius 0;
+	-webkit-border-radius: 0 @radius @radius 0;
+	-moz-border-radius: 0 @radius @radius 0;
+}
+
+
+/*斜線*/
+.oblique(@angle:-45deg,@fstColor:#000,@sndColor:#fff,@size:5px){
+	background-color: @fstColor;
+	background: repeat -webkit-linear-gradient(@angle, @fstColor 25%, @sndColor 25%, @sndColor 50%, @fstColor 50%, @fstColor 75%, @sndColor 75%, @sndColor);
+	background: repeat -moz-linear-gradient(@angle, @fstColor 25%, @sndColor 25%, @sndColor 50%, @fstColor 50%, @fstColor 75%, @sndColor 75%, @sndColor);
+	background: repeat -o-linear-gradient(@angle, @fstColor 25%, @sndColor 25%, @sndColor 50%, @fstColor 50%, @fstColor 75%, @sndColor 75%, @sndColor);
+	background-size: @size @size;
+}
+
+
+
+/*グラデーション*/
+/*縦のグラデ*/
+.gradient (@startColor: #eee, @endColor: white) {
+	background-color: @startColor;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(@startColor), to(@endColor));
+	background-image: -webkit-linear-gradient(top, @startColor, @endColor);
+	background-image: -moz-linear-gradient(top, @startColor, @endColor);
+	background-image: -ms-linear-gradient(top, @startColor, @endColor);
+	background-image: -o-linear-gradient(top, @startColor, @endColor);
+}
+/*横のグラデ*/
+.horizontal-gradient (@startColor: #eee, @endColor: white) {
+ 	background-color: @startColor;
+	background-image: -webkit-gradient(linear, left top, right top, from(@startColor), to(@endColor));
+	background-image: -webkit-linear-gradient(left, @startColor, @endColor);
+	background-image: -moz-linear-gradient(left, @startColor, @endColor);
+	background-image: -ms-linear-gradient(left, @startColor, @endColor);
+	background-image: -o-linear-gradient(left, @startColor, @endColor);
+}
+
+/*縦のグラデ（３色 50%）*/
+.gradient-50 (@startColor: #fff, @nakaColor: #000, @endColor: #fff) {
+	background: linear-gradient(to bottom, @startColor, @nakaColor 50%,  @endColor);
+	background: -webkit-linear-gradient(top, @startColor, @nakaColor 50%,  @endColor);
+	background: -moz-linear-gradient(top, @startColor, @nakaColor 50%,  @endColor);
+	background-image: -ms-linear-gradient(top, @startColor, @nakaColor 50%,  @endColor);
+	background-image: -o-linear-gradient(top, @startColor, @nakaColor 50%,  @endColor);
+}
+
+/*横のグラデ（３色 50%）*/
+.horizontal-gradient-50 (@startColor: #fff, @nakaColor: #000, @endColor: #fff) {
+	background: linear-gradient(to right, @startColor, @nakaColor 50%,  @endColor);
+	background: -webkit-linear-gradient(to right, @startColor, @nakaColor 50%,  @endColor);
+	background: -moz-linear-gradient(to right, @startColor, @nakaColor 50%,  @endColor);
+	background-image: -ms-linear-gradient(to right, @startColor, @nakaColor 50%,  @endColor);
+	background-image: -o-linear-gradient(to right, @startColor, @nakaColor 50%,  @endColor);
+}
+
+
+// マーカーライン
+.marker-line(@linecolor:#ddd, @height:0.4em, @position:88%) {
+	background-image: linear-gradient(0deg, @linecolor 0%, @linecolor 100%);
+	background-image: -webkit-gradient(linear, left top, right top, from(@linecolor), to(@linecolor));
+	background-image: -webkit-linear-gradient(left, @linecolor, @linecolor);
+	background-image: -moz-linear-gradient(left, @linecolor, @linecolor);
+	background-image: -ms-linear-gradient(left, @linecolor, @linecolor);
+	background-image: -o-linear-gradient(left, @linecolor, @linecolor);
+  background-repeat: no-repeat;
+  background-size: 100% @height;
+  background-position: 0 @position;
+  .transition();
+}
+
+
+/*--------------------------------------------------------------------------------------------------
+アニメーション：animation
+
+@easing: ease、linear、ease-in、ease-out　など
+@delay: アニメーションが開始するまでの遅延時間
+@roop: アニメーションのループ回数、infiniteを指定すると無限ループ
+@direction:アニメーションの再生方向
+	　normal : アニメーションを通常再生する。(0% → 100%)
+	　reverse : アニメーションを逆再生する。(100% → 0%)
+	　alternate : アニメーションを通常再生。ループの場合、通常再生(0% → 100%) → 逆再生(100% → 0%) といった繰り返し順で再生
+	　alternate-reverse : アニメーションを逆再生。ループの場合、逆再生(100% → 0%)  → 通常再生(0% → 100%)といった繰り返し順で再生
+@fillmode : キーフレームアニメーションで指定したプロパティをアニメーション開始前、終了後に適用するかどうかを指定
+
+----使用例----
+
+a:hover i.move{
+	.animation("move-arrow",0.2s);
+}
+
+@keyframes move-arrow{
+	0% {.transform(@translateX:0px);}
+	100% {.transform(@translateX:5px);}
+}
+
+*/
+.animation(@name,@duration:0.5s,@easing:ease,@delay:0s,@roop:1,@direction:alternate,@fillmode:both){
+	animation: @name @duration @easing @delay @roop @direction @fillmode;
+	-webkit-animation: @name @duration @easing @delay @roop @direction @fillmode;
+}
+
+
+/*--------------------------------------------------------------------------------------------------
+アニメーション：transition
+
+*/
+.transition(@second:0.4s){
+	transition: all @second;
+	-moz-transition: all @second;
+	-webkit-transition: all @second;
+	-o-transition: all @second;
+	-ms-transition: all @second;
+}
+
+.transition-delay(@second:0.1s){
+	transition-delay:@second;
+	-moz-transition-delay:@second;
+	-webkit-transition-delay:@second;
+	-o-transition-delay:@second;
+	-ms-transition-delay:@second;
+}
+
+.transform(@translateX:0,@translateY:0,@scaleX:1,@scaleY:1,@rotate:0deg){
+	transform:translateX(@translateX) translateY(@translateY) scaleX(@scaleX) scaleY(@scaleY) rotate(@rotate);
+	-webkit-transform:translateX(@translateX) translateY(@translateY) scaleX(@scaleX) scaleY(@scaleY) rotate(@rotate);
+	-moz-transform:translateX(@translateX) translateY(@translateY) scaleX(@scaleX) scaleY(@scaleY) rotate(@rotate);
+	-ms-transform:translateX(@translateX) translateY(@translateY) scaleX(@scaleX) scaleY(@scaleY) rotate(@rotate);
+}
+
+.translate(@X:0,@Y:0){
+	transform:translateX(@X) translateY(@Y);
+	-webkit-transform:translateX(@X) translateY(@Y);
+	-moz-transform:translateX(@X) translateY(@Y);
+	-ms-transform:translateX(@X) translateY(@Y);
+}
+
+.scale(@X:1,@Y:1){
+	transform:scaleX(@X) scaleY(@Y);
+	-webkit-transform:scaleX(@X) scaleY(@Y);
+	-moz-transform:scaleX(@X) scaleY(@Y);
+	-ms-transform:scaleX(@X) scaleY(@Y);
+}
+
+.rotate(@rotate:0deg){
+	transform:rotate(@rotate);
+	-webkit-transform:rotate(@rotate);
+	-moz-transform:rotate(@rotate);
+	-ms-transform:rotate(@rotate);
+}
+
+
+/*-------------------------------------------------*/
+/*Flexbox*/
+
+.flexbox{
+	-js-display: flex;
+	display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+}
+
+.justify-content(@justify:space-between){
+	/*
+	●水平方向の揃え方
+	space-between：初期値。均等に間隔を空ける
+	space-around：「space-between」と同じく均等に間隔を空ける。違うのは、左右の端のFlexアイテムにも半分ずつ間隔を空けてるところ。
+	flex-start：横配置の場合、「左揃え」、縦配置の場合、「上揃え」になります。
+	flex-end：横配置の場合「右揃え」、縦配置の場合「下揃え」になります。
+	center：「中央揃え」です。
+	*/
+	-webkit-justify-content: @justify;
+	-moz-justify-content: @justify;
+	-ms-justify-content: @justify;
+	-o-justify-content: @justify;
+	justify-content: @justify;
+}
+
+.flex-direction(@direction:row){
+	/*
+	●子要素の配置方向
+	row：初期値。子要素はHTMLの書き順で、左から右に配置されます。
+	column：子要素はHTMLの書き順で、上から下に配置されます。
+	row-reverse：「row」と同じで横に配置されるが、並ぶ順序は「右から左」になります。
+	column-reverse：「column」と同じで縦に配置されるが、並ぶ順序は「下から上」になります。
+	*/
+	-webkit-flex-direction: @direction;
+	-moz-flex-direction: @direction;
+	-ms-flex-direction: @direction;
+	-o-flex-direction: @direction;
+	flex-direction: @direction;
+}
+
+.flex-wrap(@wrap:wrap){
+	/*
+	●子要素の折り返し設定
+	wrap:初期値。折り返しを許可、「複数行」。
+	nowrap:折り返しなし、つまり「単一行」。
+	wrap-reverse:「wrap」と同じで、ただ、折り返し地点が逆になります。
+	*/
+	-webkit-flex-wrap: @wrap;
+	-moz-flex-wrap: @wrap;
+	-ms-flex-wrap: @wrap;
+	-o-flex-wrap: @wrap;
+	flex-wrap: @wrap;
+}
+
+.align-items(@align: stretch) {
+	/*
+	●垂直方向の揃え方
+	flex-start：上揃えです。
+	flex-end：下揃えです。
+	center：上下中央寄せです。
+	baseline：最初のflexアイテムのbaselineに揃います。
+	stretch：flexコンテナいっぱいに広がります。
+	*/
+  -webkit-align-items: @align;
+	-moz-flex-direction: @align;
+  -ms-align-items: @align;
+	-o-flex-wrap: @align;
+  align-items: @align;
+}
+/*-------------------------------------------------*/
+
+
+/*選択無効*/
+//スマホサイトのボタンをタップ時にテキストが選択されないようにする際に使用してください
+.noSelect{
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* Internet Explorer */
+	-khtml-user-select: none; /* KHTML browsers (e.g. Konqueror) */
+	-webkit-user-select: none; /* Chrome, Safari, and Opera */
+	-webkit-touch-callout: none; /* Disable Android and iOS callouts*/
+}
