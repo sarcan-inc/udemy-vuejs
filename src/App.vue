@@ -1,6 +1,6 @@
 <template>
-  <main>
-    <CommonHeader headerText="練習ブログ" :totalNumber="number">
+  <div>
+    <CommonHeader headerText="練習ブログ" :totalNumber = "number">
       <p>たとえばなんですけど、なんでもいいんですけど</p>
       <template v-slot:author="slotData">
         <dt>author:{{slotData.user.author}}</dt>
@@ -13,7 +13,7 @@
 
     <!-- コンポーネントを動的に変更する -->
     <nav>
-      <ul>
+       <ul>
         <li @click="currentComponent='Inquiry'">Inquiry</li>
         <li @click="currentComponent='About'">About</li>
       </ul>
@@ -21,54 +21,45 @@
     <keep-alive>
       <component :is="currentComponent"></component>
     </keep-alive>
+    
 
-    <LikeNumber blogTitle="blogtitle" @myLikeNumber="number += 1"></LikeNumber>
-    <LikeNumber blogTitle="テキスト送るときは普通の属性" @myLikeNumber="number += 1" v-slot:default="slotData">
+    <LikeNumber blogTitle = "blogtitle" @myLikeNumber = "number += 1"></LikeNumber>
+    <LikeNumber blogTitle = "テキスト送るときは普通の属性" @myLikeNumber = "number += 1" v-slot:default="slotData">
       <time>{{todayYMD}} | 投稿日：{{slotData.postDate}}</time>
     </LikeNumber>
-    <LikeNumber @myLikeNumber="number += 1"></LikeNumber>
-    <LikeNumber @myLikeNumber="number += 1"></LikeNumber>
-  </main>
+    <LikeNumber @myLikeNumber = "number += 1"></LikeNumber>
+    <LikeNumber @myLikeNumber = "number += 1"></LikeNumber>
+  </div>
 </template>
 
 <script>
-import LikeNumber from "./components/LikeNumber.vue";
-import About from "./components/About.vue";
-import Inquiry from "./components/Inquiry.vue";
+import LikeNumber from './components/LikeNumber.vue';
+import About from './components/About.vue';
+import Inquiry from './components/Inquiry.vue';
 
 export default {
-  data: function() {
-    return {
-      number: 14,
-      currentComponent: "Inquiry"
-    };
-  },
-  computed: {
-    todayYMD: function() {
-      const getDate = new Date();
-      return (
-        getDate.getFullYear() +
-        "/" +
-        getDate.getMonth() +
-        1 +
-        "/" +
-        getDate.getDate()
-      );
+  data:function(){
+    return{
+      number : 0,
+      currentComponent : "Inquiry"
     }
   },
-  components: {
-    LikeNumber: LikeNumber,
-    About: About,
-    Inquiry: Inquiry
+  computed:{
+    todayYMD:function(){
+      const getDate = new Date(); 
+      return getDate.getFullYear()+"/"+getDate.getMonth()+1+"/"+getDate.getDate();
+    }
+  },
+  components:{
+    LikeNumber : LikeNumber,
+    About : About,
+    Inquiry : Inquiry
   }
-};
+}
 </script>
 
 <style scoped>
-main {
-  background-color: #eee;
-}
-nav ul li {
+nav ul li{
   display: inline-block;
   margin: 0 5px;
   padding: 5px 20px;
@@ -76,7 +67,7 @@ nav ul li {
   text-align: center;
   cursor: pointer;
 }
-nav ul li:hover {
+nav ul li:hover{
   background: #eee;
 }
 </style>
